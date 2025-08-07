@@ -1,21 +1,31 @@
 package org.izeaux.jsscdemo;
 
 import jssc.SerialPortList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Demo2_list_ports {
 
+	private static final Logger log =  LoggerFactory.getLogger( Demo2_list_ports.class );
 
     public static void main(String[] args) {
-        System.out.println("Demo2_list_ports: getting ports names...");
-
+    	System.out.println(" ");
+    	System.out.println("**************************************");
+    	System.out.println("Demo2_list_ports    initializing...");
+    	System.out.println("**************************************");
+    	
+    	log.info(" log4j2 is working");
+    	
+    	log.info(" getting ports names...");
         String[] portNames = SerialPortList.getPortNames();
-        System.out.println("Demo2_list_ports: got it");
-        System.out.println("Demo2_list_ports: listing " + portNames.length + " port names");
+        log.info(" got it");
+        
+        log.info(" now listing " + portNames.length + " port names");
         for(int i = 0; i < portNames.length; i++){
-            System.out.println(portNames[i]);
+        	log.info("{}  :  {}", i, portNames[i]);
         }
 
-        System.out.println("Demo2_list_ports: end");
+        log.info("Demo2_list_ports: end");
     }
 }
 
