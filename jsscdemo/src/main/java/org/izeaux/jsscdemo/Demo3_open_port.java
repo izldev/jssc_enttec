@@ -53,17 +53,18 @@ public class Demo3_open_port {
     		try {
 				port.openPort();
 				
-				log.info( "      class=", port.getClass());
-				log.info( "      getPortName=", port.getPortName());
-				log.info( "      getPortName=", port.isOpened());
-				log.info( "      getPortName=", port.isCTS());
-				log.info( "      getPortName=", port.isDSR());
-				log.info( "      getPortName=", port.isRING());
-				log.info( "      getPortName=", port.isRLSD());
-				log.info( "      getPortName=", port.getEventsMask());
-				log.info( "      getPortName=", port.getFlowControlMode());
+				log.info( "      class={}", port.getClass());
+				log.info( "      getPortName={}", port.getPortName());
+				log.info( "      isOpened={}", port.isOpened());
+				log.info( "      isCTS={}", port.isCTS());
+				log.info( "      isDSR={}", port.isDSR());
+				log.info( "      isRING={}", port.isRING());
+				log.info( "      isRLSD={}", port.isRLSD());
+				log.info( "      getEventsMask={}", port.getEventsMask());
+				log.info( "      getFlowControlMode={}", port.getFlowControlMode());
 				
 				log.info("Now closing port '{}' ...",myportname);
+
 				port.closePort();
 				
 			} catch (Exception e) {
