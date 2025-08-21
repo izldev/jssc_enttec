@@ -20,7 +20,7 @@ public class Demo6_full {
 	  static final byte WIDGET_SEND_PACKET      = (byte) 0x06;
 	  static final byte WIDGET_GET_SERIALNUMBER = (byte) 10;
 	
-	private static final Logger log =  LoggerFactory.getLogger( Demo5_listen.class );
+	private static final Logger log =  LoggerFactory.getLogger( Demo6_full.class );
 
 	
     public static void main(String[] args) {
@@ -43,18 +43,22 @@ public class Demo6_full {
         
         widget.open();
         
+        log.info(" ");
+        log.info("Show is beginning");
+        
         byte[] jour = Utils.hexStringToBytes("FF FF FF FF FF FF FF FF");
         byte[] nuit = Utils.hexStringToBytes("00 00 00 00 00 00 00 00");
         
         // my first light show !
-        for (int i=1;i<=10;i++) {
+        for (int i=1;i<=5;i++) {
         	
 			try { Thread.sleep(2000);	} catch (Exception e) {	}
+			log.info(" ");
 			log.info("light up {}",i);
         	widget.sendDMXchannels(jour);
         	
 			try { Thread.sleep(2000);	} catch (Exception e) {	}
-			log.info("light down {},i");
+			log.info("light down {}",i);
         	widget.sendDMXchannels(nuit);
 			
         }

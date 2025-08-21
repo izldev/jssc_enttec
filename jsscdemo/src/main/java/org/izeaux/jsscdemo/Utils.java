@@ -15,6 +15,16 @@ public class Utils {
         return sb.toString();
     }
     
+    /**
+     *  Converts a byte to hex string 
+     * @param bytes
+     * @return
+     */
+    public static String byteToHexStr(byte b) {
+        return String.format("%02X", b);
+    }
+    
+
 
 
     /**

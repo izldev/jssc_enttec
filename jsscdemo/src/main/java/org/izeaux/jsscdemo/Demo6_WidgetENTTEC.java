@@ -20,10 +20,12 @@ public class Demo6_WidgetENTTEC {
 	static final byte WIDGET_SEND_PACKET = (byte) 0x06;
 	static final byte WIDGET_GET_SERIALNUMBER = (byte) 10;
 
-	private static final Logger log = LoggerFactory.getLogger(Demo5_listen.class);
+	private static final Logger log = LoggerFactory.getLogger(Demo6_WidgetENTTEC.class);
 
 	private String deviceName = null;
 	private SerialPort port = null;
+	private String serialnumber  = "unknown";
+
 
 	public Demo6_WidgetENTTEC(String devicename) {
 		this.deviceName = devicename;
@@ -33,7 +35,7 @@ public class Demo6_WidgetENTTEC {
 
 		String[] portNames = SerialPortList.getPortNames();
 
-		log.info("localize: scanning " + portNames.length + " port names");
+		log.info("localize: scanning {} port names to find device {}",portNames.length,this.deviceName);
 		int found = -1111;
 		for (int i = 0; i < portNames.length; i++) {
 			if (portNames[i].equals(this.deviceName)) {
@@ -202,8 +204,8 @@ public class Demo6_WidgetENTTEC {
 			if (event.isRXCHAR()) { // data is available
 				try {
 					int taille = event.getEventValue();
-					log.info("  reading bytes... taille evt = {}", taille);
-					log.info("  reading bytes... input buff = {}", port.getInputBufferBytesCount());
+					log.info("  reading bytes...  evt size = {}", taille);
+					log.info("  reading bytes...  input buff size = {}", port.getInputBufferBytesCount());
 
 					byte[] buffer = port.readBytes(taille);
 
@@ -238,25 +240,32 @@ public class Demo6_WidgetENTTEC {
 
 			// byte[2,3] = message size (lsb + msb)
 			int msgsize = (int) (((msg[3] & 0xFF) << 8) | (msg[2] & 0xFF));
-			log.info("parsemsgmessage size : {}", msgsize);
+			log.info("       received size = {} bytes", msgsize);
 
 			switch (msgtype) {
 			case 0x03:
+				log.info("*");
 				log.info("Widget parameters");
-				log.info("fw rev MSB:{}" + msg[5]);
-				log.info("fw rev LSB:{}" + msg[4]);
-				log.info("Breaktime:{}" + msg[6]);
-				log.info("Mark time:{}" + msg[7]);
-				log.info("Update:{}" + msg[8]);
+				log.info("fw rev MSB:{}" , msg[5]);
+				log.info("fw rev LSB:{}" , msg[4]);
+				log.info("Breaktime:{}" , msg[6]);
+				log.info("Mark time:{}" , msg[7]);
+				log.info("Update rate:{}" , msg[8]);
+				log.info("*");
 				break;
 
-			case 0xA:
-				log.info("Widget serial number");
-				log.info("   {} {} {} {} " + msg[7] + msg[6] + msg[5] + msg[4]);
+			case 0xA:  //BCD serial number, with LSB stored at lowest address
+				log.info("*");
+				serialnumber=Utils.byteToHexStr(msg[7]) + 
+						Utils.byteToHexStr(msg[6]) + 
+						Utils.byteToHexStr(msg[5]) + 
+						Utils.byteToHexStr(msg[4]);
+				log.info("Widget serial number : {} " , serialnumber );
+				log.info("*");
 				break;
 
 			default:
-				log.info("Message type {} not used", msgtype);
+				log.warn("Message type {} not used", msgtype);
 				break;
 			}//case
 
