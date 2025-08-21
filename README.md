@@ -20,7 +20,7 @@ using [ java-native / jssc ](https://github.com/java-native/jssc) project.
 
 ```
   $ cd jsscdemo
-  $ ./rundemo3_open.sh /dev/ttyUSB0
+  $ ./rundemo3_open.sh /dev/ttyUSB0  tested with reals physical widgets
     Trying to use port '/dev/ttyUSB0' ... (Demo3_open_port.java:46)
       trying to open (Demo3_open_port.java:50)
         isOpened=true (Demo3_open_port.java:58)
@@ -28,3 +28,4 @@ using [ java-native / jssc ](https://github.com/java-native/jssc) project.
         isDSR=true (Demo3_open_port.java:60)
         . . .
 ```
+- Demo4, Demo5 and Demo6 to be tested.....
