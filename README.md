@@ -5,7 +5,10 @@ Some sample Java applications connecting to ENTTEC DMX USB PRO widget to send DM
 using [ java-native / jssc ](https://github.com/java-native/jssc) project.
 
 ## Content
-
+- build command
+  ```
+  $ ./build.sh
+  ```
 - Demo1 not working
 - Demo2 lists all serial ports, tested with reals physical widgets
   ```
@@ -28,4 +31,5 @@ using [ java-native / jssc ](https://github.com/java-native/jssc) project.
         isDSR=true (Demo3_open_port.java:60)
         . . .
 ```
-- Demo4, Demo5 and Demo6 to be tested.....
+- Demo4, Demo5  to be tested.....
+- Demo6 works fine
