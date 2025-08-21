@@ -1,10 +1,11 @@
 
 # run Demo3 : list available serial ports
 
-# the jssc fat jar +  this application are binded in a single  enormous fat jar
+if [ "$#" -ne 1 ]; then
+   echo "one mandatory parameter : the USB device,   ex  /dev/ttyUSB0"
+fi
 
-mvn clean compile assembly:single
+PORT_DEVICE=$1
 
-PORT_NAME=$1
-java -cp target/jsscdemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar   org.izeaux.jsscdemo.Demo3_open_port  $PORT_NAME
+java -cp target/jsscdemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar   org.izeaux.jsscdemo.Demo3_open_port  $PORT_DEVICE
 
